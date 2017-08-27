@@ -19,6 +19,9 @@ public class CopyFilesCamel {
                 @Override
                 public void configure() throws Exception {
                     from("file:/Users/yifan/Desktop/Java/input?noop=true")
+                        //Note: Besides adding dependencies, to enable logging we use one of the bellow two methods: .to() or .log() in the route.
+                            .to("log:?level=INFO&showBody=true&showHeaders=true")
+                            //.log("Received Message is ${body} and Headers are ${headers}")
                             .to("file:/Users/yifan/Desktop/Java/output");
                 }
             });
