@@ -19,10 +19,13 @@ public class CopyFilesCamel {
                 @Override
                 public void configure() throws Exception {
                     from("file:/Users/yifan/Desktop/Java/input?noop=true")
-                        //Note: Besides adding dependencies, to enable logging we use one of the bellow two methods: .to() or .log() in the route.
-                            .to("log:?level=INFO&showBody=true&showHeaders=true")
-                            //.log("Received Message is ${body} and Headers are ${headers}")
-                            .to("file:/Users/yifan/Desktop/Java/output");
+                    //Note: as long as from() method runs, Camel creates an Exchange Object,which encodes the input file object
+                    //and subsequently transport this Exchange object to the destination.
+
+                    //Note: Besides adding dependencies, to enable logging we use one of the bellow two methods: .to() or .log() in the route.
+                    .to("log:?level=INFO&showBody=true&showHeaders=true")
+                    //.log("Received Message is ${body} and Headers are ${headers}")
+                    .to("file:/Users/yifan/Desktop/Java/output");
                 }
             });
             //step 3: start the route
